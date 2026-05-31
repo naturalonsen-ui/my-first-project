@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>家計簿管理アプリ</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="hero" aria-labelledby="app-title">
+        <p class="eyebrow">Monthly budget tracker</p>
+        <h1 id="app-title">家計簿管理</h1>
+        <p class="lead">
+          家賃・光熱費・クレジットカードの金額を手入力すると、合計金額と実質家賃を自動で計算します。
+          月ごとに保存して、過去の記録を一覧で確認できます。
+        </p>
+      </section>
+
+      <section class="budget-card" aria-label="家計簿入力フォーム">
+        <div class="card-header">
+          <div>
+            <h2>月別の支出</h2>
+            <p>対象月と金額を入力してください（円）</p>
+          </div>
+          <button class="button secondary-button" type="button" id="resetButton">入力をリセット</button>
+        </div>
+
+        <form id="budgetForm" class="budget-form">
+          <div class="month-control">
+            <label for="targetMonth">対象月</label>
+            <input id="targetMonth" name="targetMonth" type="month" required />
+          </div>
+
+          <div class="field-grid" id="fieldGrid"></div>
+        </form>
+
+        <div class="summary" aria-live="polite">
+          <div class="summary-row highlight">
+            <span>実質家賃</span>
+            <strong id="actualRentTotal">¥0</strong>
+          </div>
+          <div class="summary-row total">
+            <span>合計金額</span>
+            <strong id="grandTotal">¥0</strong>
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <button class="button primary-button" type="button" id="saveRecordButton">この月の記録を保存</button>
+          <p class="save-status" id="saveStatus" role="status" aria-live="polite"></p>
+        </div>
+      </section>
+
+      <section class="history-card" aria-labelledby="history-title">
+        <div class="card-header history-header">
+          <div>
+            <h2 id="history-title">保存済みの記録</h2>
+            <p>保存した月を選ぶと入力欄に読み込めます。</p>
+          </div>
+          <div class="history-total">
+            <span>保存済み合計</span>
+            <strong id="savedGrandTotal">¥0</strong>
+          </div>
+        </div>
+
+        <div class="history-table-wrap">
+          <table class="history-table">
+            <thead>
+              <tr>
+                <th>対象月</th>
+                <th>家賃</th>
+                <th>家賃補助</th>
+                <th>実質家賃</th>
+                <th>ガス</th>
+                <th>上水道</th>
+                <th>下水道</th>
+                <th>電気</th>
+                <th>クレジットカード</th>
+                <th>合計金額</th>
+                <th>操作</th>
+              </tr>
+            </thead>
+            <tbody id="historyTableBody"></tbody>
+          </table>
+          <p class="empty-history" id="emptyHistory">まだ保存された記録はありません。</p>
+        </div>
+      </section>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
